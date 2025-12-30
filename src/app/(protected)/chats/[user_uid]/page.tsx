@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation';
 import { JSX, Suspense } from 'react';
-
 export default async function MessagesPage({
   params,
 }: {
@@ -8,5 +7,5 @@ export default async function MessagesPage({
 }): Promise<JSX.Element> {
   const user_uid = (await params).user_uid;
   notFound();
-  <Suspense></Suspense>;
+  return <Suspense></Suspense>;
 }

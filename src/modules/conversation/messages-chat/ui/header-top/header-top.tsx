@@ -1,6 +1,6 @@
 import { JSX } from 'react';
 import { ImageUI } from 'shared/ui/image';
-import { getLastSeenLabel } from '../../../../../../libs';
+import { getLastSeenLabel } from '../../../libs';
 import { getContactById } from '../../utils/get-contact-by-id';
 import { HeaderTopButtonsBlock } from '../header-top-buttons-block/header-top-buttons-block';
 import styles from './header-top.module.scss';
