@@ -615,7 +615,7 @@ export function useWebSocketChat(wsUrl: string, currentUserId: string, refreshUr
             !chatsListRef.current?.some((chat: Chat) => chat.chat.chatKey === data.object.chat_key)
           ) {
             // делаем рефреш chat-list у участника/подписчика, чтобы группа/каннал в которую его добавили сразу появился у него в DOM
-            queryClient.removeQueries({
+            queryClient.refetchQueries({
               queryKey: ['chats', 'chat-list', searchChatsListRef.current],
             });
           } else {
@@ -642,7 +642,12 @@ export function useWebSocketChat(wsUrl: string, currentUserId: string, refreshUr
             queryClient.refetchQueries({
               queryKey: ['chats', 'chat-list', searchChatsListRef.current],
             });
-            console.log('start');
+            // если в момент удаления удаленный участник/подписчик находится в чате то
+            if (data.object.chat_key === userIdRef.current) {
+              // переходим на страницу чаты и закрываем блок инфо
+              router.push(`/chats`);
+              closeInfoScreen();
+            }
             //cooбщение получили все иные участники/подписчики группы/канала
           } else {
             // делаем рефреш 'participants-list' у участника/подписчика, чтобы в определенной группе/канале
